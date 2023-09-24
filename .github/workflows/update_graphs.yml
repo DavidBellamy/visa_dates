@@ -1,0 +1,36 @@
+name: Update Graphs
+
+on:
+  schedule:
+    - cron: '0 0 */14 * *'  # Runs every two weeks
+
+jobs:
+  update:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Python
+      uses: actions/setup-python@v2
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        python -m pip install --upgrade pip
+        pip install -r requirements.txt
+
+    - name: Run web scraping script
+      run: python scrape_visa_bulletins.py
+
+    - name: Run visualization script
+      run: python visualize_visa_wait_times.py
+
+    - name: Commit and push changes
+      run: |
+        git config --local user.email "action@github.com"
+        git config --local user.name "GitHub Action"
+        git commit -am "Update graphs with latest data"
+        git push
