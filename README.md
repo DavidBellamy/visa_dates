@@ -7,8 +7,9 @@ I've included a basic time series visualization of the EB-1 through EB-4 visa wa
 
 ## Dependencies
 
-The scraper and visualization code requires the following Python libraries, which can be installed using pip:
+The scraper and visualization code require the following Python libraries, which can be installed using pip:
 
+- requests
 - pandas
 - tqdm
 - matplotlib
