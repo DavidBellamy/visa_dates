@@ -172,6 +172,7 @@ def main():
     countries = ['india', 'china', 'mexico', 'philippines']
     for country in tqdm(countries, desc=f"Extracting data for each country and computing backlogs"):
         country_df = extract_country_data(country, all_data)
+        country_df = country_df.sort_values(by='visa_bulletin_date', ascending=False)
         country_df.to_csv(f'data/{country}_visa_backlog_timecourse.csv', index=False)
 
 
