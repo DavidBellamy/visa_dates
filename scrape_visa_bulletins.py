@@ -140,6 +140,8 @@ def extract_country_data(country: str, all_data: List[pd.DataFrame]) -> pd.DataF
                 country_col = df.columns[col_idx]
                 try:
                     df = df[['employment-based', country_col, 'visa_bulletin_date']]
+                    df.columns = df.columns.str.replace(country_col, 'final_action_dates')
+                    df.columns = df.columns.str.replace('employment-based', 'EB_level')
                     country_data.append(df)
                 except:
                     pass
@@ -147,12 +149,8 @@ def extract_country_data(country: str, all_data: List[pd.DataFrame]) -> pd.DataF
         country_df = pd.concat(country_data, axis=0, ignore_index=True)
 
         # calculate backlog period length (difference in months between 'india' and 'bulletin_year_month')
-        country_df[country_col] = country_df.apply(lambda row: string_to_datetime(row[country_col], row['visa_bulletin_date']), axis=1)
-        country_df['visa_wait_time'] = country_df.apply(lambda row: (row['visa_bulletin_date'] - row[country_col]).days / 365.25, axis=1)
-
-        # Clean up column names and entries
-        country_df.columns = country_df.columns.str.replace('employment-based', 'EB_level')
-        country_df.columns = country_df.columns.str.replace(country_col, f'final_action_dates')
+        country_df['final_action_dates'] = country_df.apply(lambda row: string_to_datetime(row['final_action_dates'], row['visa_bulletin_date']), axis=1)
+        country_df['visa_wait_time'] = country_df.apply(lambda row: (row['visa_bulletin_date'] - row['final_action_dates']).days / 365.25, axis=1)
         
         # In column "EB_level", sub values "1st", "2nd", "3rd", "4th", for the integers 1, 2, 3, 4
         country_df['EB_level'] = country_df['EB_level'].str.replace('st', '').str.replace('nd', '').str.replace('rd', '').str.replace('th', '')
@@ -170,8 +168,6 @@ def main():
                         desc="Extracting all employment-based visa bulletin tables"):
         table_data = extract_tables(link)
         all_data.extend(table_data)
-        if i == 50:
-            pass
 
     countries = ['india', 'china', 'mexico', 'philippines']
     for country in tqdm(countries, desc=f"Extracting data for each country and computing backlogs"):
