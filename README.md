@@ -29,7 +29,7 @@ pip install -r requirements.txt
 
 The script works by first extracting links to monthly visa bulletins from the [main page](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html). Each link is then visited to extract employment-based visa tables (specifically the first occurrence, which contains final action dates). For each country, this tabular data is then cleaned and processed, including converting date strings to datetime objects, calculating the backlog period, and renaming columns for clarity.
 
-## Output
+## Scraped Data Output
 
 The output is a CSV file named {country}_visa_backlog_timecourse.csv with the following columns:
 
