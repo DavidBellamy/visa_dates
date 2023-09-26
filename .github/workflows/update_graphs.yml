@@ -3,7 +3,7 @@ name: Update Graphs
 on:
   workflow_dispatch:
   schedule:
-    - cron: '0 0 * * SUN'  # Runs every Sunday at midnight
+    - cron: '0 0 * * *'  # Runs every day at midnight
 
 jobs:
   update:
