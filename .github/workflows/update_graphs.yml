@@ -1,8 +1,9 @@
 name: Update Graphs
 
 on:
+  workflow_dispatch:
   schedule:
-    - cron: '0 0 */14 * *'  # Runs every two weeks
+    - cron: '0 0 * * *'  # Runs every day at midnight
 
 jobs:
   update:
@@ -32,5 +33,10 @@ jobs:
       run: |
         git config --local user.email "action@github.com"
         git config --local user.name "GitHub Action"
-        git commit -am "Update graphs with latest data"
-        git push
+        # Check for changes
+        if git diff --exit-code; then
+          echo "No changes to commit"
+        else
+          git commit -am "Update graphs with latest data"
+          git push
+        fi
