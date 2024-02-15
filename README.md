@@ -1,5 +1,10 @@
 # Visa Bulletin Scraper
 
+![India visa wait times](figures/India_visa_wait_times.png)
+![China visa wait times](figures/China_visa_wait_times.png)
+![Mexico visa wait times](figures/Mexico_visa_wait_times.png)
+![Philippines visa wait times](figures/Philippines_visa_wait_times.png)
+
 This codebase is designed to scrape employment-based visa bulletin data from the [U.S. Department of State's website](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html) and process it into a structured CSV file for each country: India, China, Mexico and Philippines. The main script is `scrape_visa_bulletins.py` andthe scraped data by country is in `data/`.
 
 ## Visualizing visa wait-times
