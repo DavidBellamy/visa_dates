@@ -2,7 +2,7 @@ import matplotlib.pyplot as plt
 import pandas as pd
 
 
-countries = ['India', 'China', 'Mexico', 'Philippines']
+countries = ['India', 'China', 'Mexico', 'Philippines', 'RoW']
 
 for country in countries:
     df = pd.read_csv(f'data/{country.lower()}_visa_backlog_timecourse.csv')
