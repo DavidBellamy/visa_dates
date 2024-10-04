@@ -8,12 +8,12 @@
 ![Philippines visa wait times](figures/Philippines_visa_wait_times.png)
 ![Rest of the world visa wait times](figures/RoW_visa_wait_times.png)
 
-This codebase scrapes the employment-based visa bulletin data from the [U.S. Department of State's website](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html) and processes it into a clean CSV file for each country: India, China, Mexico and Philippines. The scraper script is `scrape_visa_bulletins.py` and the scraped data separated by country is in `data/`.
+This codebase scrapes the employment-based visa bulletin data from the [U.S. Department of State's website](https://travel.state.gov/content/travel/en/legal/visa-law0/visa-bulletin.html) and processes it into a clean CSV file for each country: India, China, Mexico and Philippines, as well as the rest of the world. The scraper script is `scrape_visa_bulletins.py` and the scraped data separated by country is in `data/`.
 
 The scraper is re-run every Sunday at midnight to ensure the data files and figures are always up-to-date. The top of this README has a status badge indicating if the most recent data update succeeded or failed. This provides an aggregated view of historical visa bulletin data in both CSV and visual format for easy consumption as opposed to the outdated PDF aggregations in tabular format on the website. 
 
 ## Visualizing visa wait-times
-I've included a basic time series visualization of the EB-1 through EB-4 visa wait times for each country mentioned above in `figures/`. You can also take the `.csv` files from `data/` and upload them to ChatGPT-4 (with the advanced data analysis extension enabled) and ask it to make any figures you want. Good luck!
+For each specially designated country and the rest of the world, a basic time series visualization of the EB-1 through EB-4 visa wait times can be found in `figures/`. You can also take the `.csv` files from `data/` and upload them to ChatGPT-4 (with the advanced data analysis extension enabled) and ask it to make any figures you want. Good luck!
 
 ## Dependencies
 
