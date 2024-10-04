@@ -135,6 +135,13 @@ def string_to_datetime(date_str: str, bulletin_date: datetime) -> Union[None, da
 def extract_country_data(country: str, all_data: List[pd.DataFrame]) -> pd.DataFrame:
         country_data = []
         for df in all_data:
+            # Replace non-breaking spaces with regular spaces in column names
+            df.columns = [column.replace(u'\xa0', u' ') for column in df.columns]
+
+            # for rest of the world, put country as the specific string
+            if country == 'row':
+                country = 'all chargeability  areas except those listed'
+
             if any([country in col for col in df.columns]):
                 col_idx = [i for i, col in enumerate(df.columns) if country in col][0]
                 country_col = df.columns[col_idx]
@@ -169,7 +176,7 @@ def main():
         table_data = extract_tables(link)
         all_data.extend(table_data)
 
-    countries = ['india', 'china', 'mexico', 'philippines']
+    countries = ['india', 'china', 'mexico', 'philippines', 'row']
     for country in tqdm(countries, desc=f"Extracting data for each country and computing backlogs"):
         country_df = extract_country_data(country, all_data)
         country_df = country_df.sort_values(by='visa_bulletin_date', ascending=False)
