@@ -1,5 +1,3 @@
-![Update Graphs](https://github.com/DavidBellamy/visa_dates/actions/workflows/update_graphs.yml/badge.svg)
-
 # Visa Bulletin Scraper
 
 ![India visa wait times](figures/India_visa_wait_times.png)
